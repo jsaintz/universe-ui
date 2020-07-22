@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:universe/constants.dart';
+import 'package:universe/detail_page.dart';
 
 import 'data.dart';
 
@@ -42,28 +43,6 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.w900),
                       textAlign: TextAlign.left,
                     ),
-                    DropdownButton(
-                      items: [
-                        DropdownMenuItem(
-                          child: Text(
-                            'Solar System',
-                            style: TextStyle(
-                              fontFamily: 'Avenir',
-                              fontSize: 24,
-                              color: const Color(0x7cdbf1ff),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                      onChanged: (value) {},
-                      icon: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Image.asset('assets/drop_down_icon.png'),
-                      ),
-                      underline: SizedBox(),
-                    ),
                   ],
                 ),
               ),
@@ -82,8 +61,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: (){
-                        
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, a, b) => DetailPage(
+                              planetInfo: planets[index],
+                            ),
+                          ),
+                        );
                       },
                       child: Stack(
                         children: <Widget>[
@@ -153,7 +139,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          Image.asset(planets[index].iconImage),
+                          Hero(
+                            tag: planets[index].position,
+                            child: Image.asset(planets[index].iconImage),
+                          ),
                         ],
                       ),
                     );

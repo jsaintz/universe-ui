@@ -5,8 +5,8 @@ class PlanetInfo {
   final String description;
   final List<String> images;
 
-  PlanetInfo(int i,  {
-    this.position,
+  PlanetInfo(
+    this.position, {
     this.name,
     this.iconImage,
     this.description,
